@@ -30,7 +30,7 @@ bool isPrime(int n){
     
     int shiftedValue = P[pNumber] >> bitPsition; //Right shift operation
 
-    return (shiftedValue & 1) != 0; //return true or faulse
+    return (shiftedValue & 1) != 0; //return true or faulse.
 }
 
 int main() {
