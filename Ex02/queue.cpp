@@ -5,7 +5,7 @@ class queue{
     bool empty(){
     
     }
-}
+};
 
 void main(){
 
