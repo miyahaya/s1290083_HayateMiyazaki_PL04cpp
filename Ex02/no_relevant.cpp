@@ -2,9 +2,12 @@
 
 struct Point {
     public: int x, y, z;
-    Point(int x, int y, int z) : x(x), y(y), z(z) {};
-    Point (int x) : x(x){
-        x = 3;
+    Point(int x, int y, int z){
+        x = x;
+        y = y;
+        z = z;
+    };
+    Point (){
     };
 };
 
