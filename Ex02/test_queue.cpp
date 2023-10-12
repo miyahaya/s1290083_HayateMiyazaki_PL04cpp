@@ -2,5 +2,5 @@
 #include "queue.cpp"
 
 int main(){
-    queue que();
+    std :: cout << "Please enter the operation(enqueue or dequeue or peek)" << std::endl;
 }
