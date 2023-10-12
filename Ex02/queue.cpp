@@ -30,6 +30,7 @@ class queue : Queue{
     }
 
     int size(){
+        std::cout << "size: " << std::endl;
         return _num_items;
     };
 
@@ -39,13 +40,16 @@ class queue : Queue{
             return;
         }
         _items[_last] = point;
+        std::cout << "enqueue: "<< "x = " << point.x << ", y = " << point.y << ", z = " << point.z << std::endl;
         _last++;
         _num_items++;
+        // Displays information on the current queue.
         printStatus(_items,_first,_last);
         };
 
     void dequeue(){
         if(empty()){
+            std::cout << "dequeue" << std::endl;
             throw QueueEmptyException();
         }
         Point *keep = new Point[100];
@@ -57,14 +61,19 @@ class queue : Queue{
         delete keep;
         _last--;
         _num_items--;
+        std::cout << "dequeue" << std::endl;
+        // Displays information on the current queue.
         printStatus(_items,_first,_last);
     };
 
     Point peek(){
         if(empty()){
+            std::cout << "peek" << std::endl;
             throw QueueEmptyException();
         }
         else {
+
+            // Rebuild the array and minus one index number for all elements.
             Point peek = _items[_first];
             Point *keep = new Point[_max_size];
             for(int i = 0 ; i < _max_size - 1; i++){
@@ -75,6 +84,8 @@ class queue : Queue{
             delete keep;
             _last--;
             _num_items--;
+            std::cout << "peek: "<< "x = " << peek.x << ", y = " << peek.y << ", z = " << peek.z << std::endl; 
+            // Displays information on the current queue.
             printStatus(_items,_first,_last);
             return peek;
             
@@ -82,11 +93,13 @@ class queue : Queue{
         }
     }
 
+//　Function to output queue status
     void printStatus(Point *p, int first, int last){
         std::cout << "status" << std::endl;
         for(int i = first; i < last; i++){
-            std::cout << p[i].x << " " << p[i].y << " " << p[i].z << std::endl;
+            std::cout << p[i].x << " " << p[i].y << " " << p[i].z <<std::endl;
         }
+        std::cout << "" << std::endl;
     }
 };
 
