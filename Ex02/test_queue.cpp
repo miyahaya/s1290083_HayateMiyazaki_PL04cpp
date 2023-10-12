@@ -24,6 +24,7 @@ void cal(string operate, queue &que){
     else{
         cout << "error:Please enter correct value" << endl;
     }
+    return;
 }
 
 int main(){
@@ -34,8 +35,12 @@ int main(){
         cin >> operate;
         if(operate == "end")exit(0);
 
-        cal(operate, que);
+        else cal(operate, que);
     }
 
+}
+
+void print(int x){
+    cout << x << endl;
 }
 

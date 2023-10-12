@@ -41,13 +41,12 @@ class queue : Queue{
         _items[_last] = point;
         _last++;
         _num_items++;
-    };
+        printStatus(_items,_first,_last);
+        };
 
     void dequeue(){
         if(empty()){
-            std::cout << _last << _first << std::endl;
-            std::cerr << "Queue is empty. Cannot dequeue." << std::endl;
-            return;
+            throw QueueEmptyException();
         }
         Point *keep = new Point[100];
         for(int i = 0 ; i < _max_size - 1; i++){
@@ -58,6 +57,7 @@ class queue : Queue{
         delete keep;
         _last--;
         _num_items--;
+        printStatus(_items,_first,_last);
     };
 
     Point peek(){
@@ -75,7 +75,18 @@ class queue : Queue{
             delete keep;
             _last--;
             _num_items--;
+            printStatus(_items,_first,_last);
             return peek;
+            
+            
+        }
+    }
+
+    void printStatus(Point *p, int first, int last){
+        std::cout << "status" << std::endl;
+        for(int i = first; i < last; i++){
+            std::cout << p[i].x << " " << p[i].y << " " << p[i].z << std::endl;
         }
     }
 };
+
