@@ -48,10 +48,15 @@ int main() {
     std::sort(testCases, testCases + SIZE);
 
     //Determines if the number is prime and outputs
-    for (unsigned int i = 0; i < sizeof(testCases) / sizeof(testCases[0]); ++i) {
-        unsigned int num = testCases[i];
-        bool result = isPrime(num);
-        std::cout << num << " is " << (result ? "prime" : "not prime") << std::endl;
+    // for (unsigned int i = 0; i < sizeof(testCases) / sizeof(testCases[0]); ++i) {
+    //     unsigned int num = testCases[i];
+    //     bool result = isPrime(num);
+    //     std::cout << num << " is " << (result ? "prime" : "not prime") << std::endl;
+    // }
+
+    for(int i = 0; i < 1025; i ++){
+        bool result = isPrime(i);
+        std::cout << i << " is " << (result ? "prime" : "not prime") << std::endl;
     }
 
     return 0;
