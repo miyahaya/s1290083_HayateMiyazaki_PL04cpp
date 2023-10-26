@@ -75,15 +75,6 @@ class queue : Queue{
 
             // Rebuild the array and minus one index number for all elements.
             Point peek = _items[_first];
-            Point *keep = new Point[_max_size];
-            for(int i = 0 ; i < _max_size - 1; i++){
-                keep[i] = _items[i+1];
-            }
-
-            _items = keep;
-            delete keep;
-            _last--;
-            _num_items--;
             std::cout << "peek: "<< "x = " << peek.x << ", y = " << peek.y << ", z = " << peek.z << std::endl; 
             // Displays information on the current queue.
             printStatus(_items,_first,_last);
