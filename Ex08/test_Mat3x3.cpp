@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Mat3x3.cpp"
 #include "Mat3x3.h"
 
 int main() {

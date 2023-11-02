@@ -1,14 +1,12 @@
 #include "Mat3x3.h"
 
 Mat3x3::Mat3x3() {
-    // デフォルトコンストラクタで単位行列を作成
     coeffs[0] = 1.0f; coeffs[1] = 0.0f; coeffs[2] = 0.0f;
     coeffs[3] = 0.0f; coeffs[4] = 1.0f; coeffs[5] = 0.0f;
     coeffs[6] = 0.0f; coeffs[7] = 0.0f; coeffs[8] = 1.0f;
 }
 
 Mat3x3::Mat3x3(float coeffs[9]) {
-    // 別のコンストラクタで配列から行列を作成
     for (int i = 0; i < 9; i++) {
         this->coeffs[i] = coeffs[i];
     }
