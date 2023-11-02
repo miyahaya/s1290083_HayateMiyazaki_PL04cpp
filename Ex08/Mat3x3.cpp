@@ -1,52 +1,95 @@
-# include<iostream>
-# include"Mat3x3.h"
+#include "Mat3x3.h"
 
-const int N = 3; 
+Mat3x3::Mat3x3() {
+    // デフォルトコンストラクタで単位行列を作成
+    coeffs[0] = 1.0f; coeffs[1] = 0.0f; coeffs[2] = 0.0f;
+    coeffs[3] = 0.0f; coeffs[4] = 1.0f; coeffs[5] = 0.0f;
+    coeffs[6] = 0.0f; coeffs[7] = 0.0f; coeffs[8] = 1.0f;
+}
 
-class Mat : public MatN{
-   
-    private :
-    float C[N][N];
-    public:
-    float* add(float** A, float** B)override{
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                C[i][j] = A[i][j] + B[i][j];
-            }
+Mat3x3::Mat3x3(float coeffs[9]) {
+    // 別のコンストラクタで配列から行列を作成
+    for (int i = 0; i < 9; i++) {
+        this->coeffs[i] = coeffs[i];
+    }
+}
+
+Mat3x3 Mat3x3::operator+(const Mat3x3& other) const {
+    Mat3x3 result;
+    for (int i = 0; i < 9; i++) {
+        result.coeffs[i] = coeffs[i] + other.coeffs[i];
+    }
+    return result;
+}
+
+Mat3x3 Mat3x3::operator-(const Mat3x3& other) const {
+    Mat3x3 result;
+    for (int i = 0; i < 9; i++) {
+        result.coeffs[i] = coeffs[i] - other.coeffs[i];
+    }
+    return result;
+}
+
+Mat3x3 Mat3x3::operator*(const Mat3x3& other) const {
+    Mat3x3 result;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            result.coeffs[i * 3 + j] =
+                coeffs[i * 3] * other.coeffs[j] +
+                coeffs[i * 3 + 1] * other.coeffs[j + 3] +
+                coeffs[i * 3 + 2] * other.coeffs[j + 6];
         }
-    };
-    float* sub(float** A, float** B)override{
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                C[i][j] = A[i][j] - B[i][j];
-            }
+    }
+    return result;
+}
+
+Mat3x3& Mat3x3::operator+=(const Mat3x3& other) {
+    for (int i = 0; i < 9; i++) {
+        coeffs[i] += other.coeffs[i];
+    }
+    return *this;
+}
+
+Mat3x3& Mat3x3::operator-=(const Mat3x3& other) {
+    for (int i = 0; i < 9; i++) {
+        coeffs[i] -= other.coeffs[i];
+    }
+    return *this;
+}
+
+Mat3x3& Mat3x3::operator*=(const Mat3x3& other) {
+    Mat3x3 temp = *this * other;
+    *this = temp;
+    return *this;
+}
+
+Mat3x3 Mat3x3::operator-() const {
+    Mat3x3 result;
+    for (int i = 0; i < 9; i++) {
+        result.coeffs[i] = -coeffs[i];
+    }
+    return result;
+}
+
+float Mat3x3::operator()(int i, int j) const {
+    return coeffs[i * 3 + j];
+}
+
+bool Mat3x3::operator==(const Mat3x3& other) const {
+    for (int i = 0; i < 9; i++) {
+        if (std::abs(coeffs[i] - other.coeffs[i]) > 0.0001f) {
+            return false;
         }
-    };
-    float* mult(float** A, float** B)override{
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                for(int k = 0; k < N; k++){
-                    C[i][j] += A[i][j] * B[j][k];
-                }
-            }
+    }
+    return true;
+}
+
+std::ostream& operator<<(std::ostream& os, const Mat3x3& matrix) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            os << matrix(i, j) << " ";
         }
-
-    };
-    float* compadd(float A[], float B[])override
-    ;
-    float* compsub(float A[], float B[])override{
-
-    };
-    float* compmult(float A[], float B[])override{
-
-    };
-    float* minus(float A[], float B[])override{
-
-    };
-    float accsess(int i, int j)override{
-
-    };
-    bool equal(float A[], float B[])override{
-
-    };
-};
+        os << std::endl;
+    }
+    return os;
+}
