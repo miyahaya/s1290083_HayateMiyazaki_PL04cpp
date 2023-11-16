@@ -3,7 +3,7 @@
 
 namespace PL04
 {
-    template <typename BiDirIt>
+    template <class BiDirIt>
     void Sort(BiDirIt begin, BiDirIt end)
     {
         for (BiDirIt i = begin + 1; i != end; ++i)
